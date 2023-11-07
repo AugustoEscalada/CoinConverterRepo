@@ -8,6 +8,10 @@ namespace CoinConverter.Entities
 
         public int CurrencyId { get; set; } 
 
+        public string? leyend { get; set; }
+  
+        public string? symbol { get; set; }
+
         public int Ic { get; set; }
     }
 }

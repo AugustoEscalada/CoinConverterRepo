@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoinConverter.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoinConverter.Controllers
 {
@@ -6,9 +7,11 @@ namespace CoinConverter.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        public IActionResult Index()
+        private readonly UserServices _userServices;
+
+        public UserController(UserServices userServices)
         {
-            return View();
+            _userServices = userServices;
         }
     }
 }

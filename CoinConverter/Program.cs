@@ -16,7 +16,7 @@ namespace CoinConverter
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ConverterContext>(dbContextOptions => dbContextOptions.UseSqlite(
-   builder.Configuration["ConnectionStrings:UrlShortenerConection"]));
+   builder.Configuration["ConnectionStrings:CoinConverterConection"]));
 
             var app = builder.Build();
 

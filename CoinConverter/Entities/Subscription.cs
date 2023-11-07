@@ -7,9 +7,9 @@ namespace CoinConverter.Entities
         [Key]
         public int SubId { get; set; }
 
-        public string name { get; set; } = string.Empty;
+        public string? Name { get; set; } 
 
-        public int convertions { get; set; }
+        public int Convertions { get; set; }
 
 
     }
