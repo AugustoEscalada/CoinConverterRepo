@@ -1,17 +1,32 @@
-﻿using CoinConverter.Services;
+﻿using CoinConverter.Models.DTO;
+
+using CoinConverter.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoinConverter.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    [ApiController]
+    public class UserController : ControllerBase
     {
-        private readonly UserServices _userServices;
-
-        public UserController(UserServices userServices)
+        private readonly IUserServices _userService;
+        public UserController(IUserServices userRepository)
         {
-            _userServices = userServices;
+            _userService = userRepository;
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(UserForCreationDto dto)
+        {
+            try
+            {
+                _userService.Create(dto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex + "error aca");
+            }
+            return Created("Created", dto);
         }
     }
 }

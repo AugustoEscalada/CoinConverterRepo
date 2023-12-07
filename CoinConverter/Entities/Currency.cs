@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoinConverter.Entities
 {
@@ -6,12 +7,23 @@ namespace CoinConverter.Entities
     {
         [Key]
 
-        public int CurrencyId { get; set; } 
+        public int CurrencyId { get; set; }
+
+        [Required]
 
         public string? leyend { get; set; }
-  
+
+        [Required]
         public string? symbol { get; set; }
 
-        public int Ic { get; set; }
+        [Required]
+        public float Ic { get; set; }
+
+        [ForeignKey("UserId")]
+
+        public User? User { get; set; }
+
+        public int? UserId { get; set; }
+
     }
 }

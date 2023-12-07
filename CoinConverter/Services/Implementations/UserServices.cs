@@ -1,22 +1,38 @@
-﻿using CoinConverter.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using CoinConverter.Data;
+using CoinConverter.Entities;
+using CoinConverter.Models.DTO;
+using CoinConverter.Services.Interfaces;
 
 namespace CoinConverter.Services.Implementations
 {
-    using CoinConverter.Services;
-    using Microsoft.AspNetCore.Mvc;
 
-   
-        [ApiController]
-        [Route("api/[controller]")]
-        public class UserController : Controller
+    public class UserServices : IUserServices
+    {
+        private ConverterContext _context;
+        public UserServices(ConverterContext context)
         {
-            private readonly UserServices _userServices;
-
-            public UserController(UserServices userServices)
-            {
-                _userServices = userServices;
-            }
+            _context = context;
         }
-    
+
+        public User? ValidateUser(AuthRequestDto authRequestBody)
+        {
+            return _context.Users.FirstOrDefault(p => p.Username == authRequestBody.Username && p.Password == authRequestBody.Password);
+        }
+
+        public void Create(UserForCreationDto dto)
+        {
+            User newUser = new User()
+            {
+                Username = dto.Username,
+                Password = dto.Password,
+                Email = dto.Email,
+            };
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+        }
+
+
+
+
+    }
 }
